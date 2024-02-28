@@ -11,11 +11,13 @@ https://proyectofinaluno.atlassian.net/browse/PF-51
 
 # Estructura de datos para el nuevo servicio:
 - Payload (IN) - POST
+- Nombre del metodo: crear-servicio
 ```json
 {
     "nombre": "",
     "descripcion": "",
     "precio": 0.00,
+    "tipoServicioId":"ENUM",
     "regionId": "COL|MEX|BRA",
     "paisId": "COL|MEX|BRA",
     "ciudad": "",
@@ -42,6 +44,7 @@ https://proyectofinaluno.atlassian.net/browse/PF-51
     nombre
     descripcion
     precio
+    tipoServicioId
     regionId
     paisId
     ciudad
@@ -79,3 +82,42 @@ https://proyectofinaluno.atlassian.net/browse/PF-51
 5. Ejecutar contenedor
     docker run <<nombre de contenedor>>  
 
+# Microservicios (local)
+    3000-API Gateway
+        http://127.0.0.1:3000/health
+
+    3001-Socios 
+        http://127.0.0.1:3001/health
+        http://127.0.0.1:3001/reset
+
+    3002-Usuario     
+        http://127.0.0.1:3002/crear-servicio
+        http://127.0.0.1:3002/health
+
+    3003-Sqs        
+        http://127.0.0.1:3003/health
+
+    3004-Monitor    
+        http://127.0.0.1:3004/health
+        http://127.0.0.1:3004/reset
+        http://127.0.0.1:3004/consultar-estatus-microservicios
+
+# Microservicios (aws)
+    3000-API Gateway
+        http://{host-api-gateway}:3000/health
+
+    3001-Socios
+        http://{host-socios}/health
+        http://{host-gateway}/reset
+
+    3002-Usuarios    
+        http://{host-usuarios}/crear-servicio
+        http://{host-usuarios}/health
+
+    3003-Sqs        
+        http://{host-sqs}/health
+
+    3004-Monitor    
+        http://{host-monitor}/health
+        http://{host-monitor}/reset
+        http://{host-monitor}/consultar-estatus-microservicios
