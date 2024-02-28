@@ -81,43 +81,57 @@ https://proyectofinaluno.atlassian.net/browse/PF-51
 
 5. Ejecutar contenedor
     docker run <<nombre de contenedor>>  
+    docker run -p <<puerto>>:<<puerto>> <<nombre de contenedor>>  
 
 # Microservicios (local)
     3000-API Gateway
-        http://127.0.0.1:3000/health
+        http://127.0.0.1:3000/gateway/health
 
     3001-Socios 
-        http://127.0.0.1:3001/health
-        http://127.0.0.1:3001/reset
+        http://127.0.0.1:3001/socios/health
+        http://127.0.0.1:3001/socios/reset
 
     3002-Usuario     
-        http://127.0.0.1:3002/crear-servicio
-        http://127.0.0.1:3002/health
+        http://127.0.0.1:3002/usuarios/crear-servicio
+        http://127.0.0.1:3002/usuarios/health
 
     3003-Sqs        
-        http://127.0.0.1:3003/health
+        http://127.0.0.1:3003/sqs/health
 
     3004-Monitor    
-        http://127.0.0.1:3004/health
-        http://127.0.0.1:3004/reset
-        http://127.0.0.1:3004/consultar-estatus-microservicios
+        http://127.0.0.1:3004/monitor/health
+        http://127.0.0.1:3004/monitor/reset
+        http://127.0.0.1:3004/monitor/consultar-estatus-microservicios
 
 # Microservicios (aws)
     3000-API Gateway
-        http://{host-api-gateway}:3000/health
+        http://{host-api-gateway}/gateway/health
 
     3001-Socios
-        http://{host-socios}/health
-        http://{host-gateway}/reset
+        http://{host-socios}/socios/health
+        http://{host-gateway}/socios/reset
 
     3002-Usuarios    
-        http://{host-usuarios}/crear-servicio
-        http://{host-usuarios}/health
+        http://{host-usuarios}/usuarios/crear-servicio
+        http://{host-usuarios}/usuarios/health
 
     3003-Sqs        
         http://{host-sqs}/health
 
     3004-Monitor    
-        http://{host-monitor}/health
-        http://{host-monitor}/reset
-        http://{host-monitor}/consultar-estatus-microservicios
+        http://{host-monitor}/monitor/health
+        http://{host-monitor}/monitor/reset
+        http://{host-monitor}/monitor/consultar-estatus-microservicios
+
+
+# Base de datos Monitor
+sudo --login --user=postgres psql
+
+CREATE DATABASE monitordb;
+CREATE USER monitoru WITH PASSWORD 'monitorp';
+GRANT ALL PRIVILEGES ON DATABASE monitordb TO admin;
+\c monitordb  postgres;
+GRANT ALL ON SCHEMA public TO monitoru;
+
+drop database monitordb;
+drop role monitoru;
