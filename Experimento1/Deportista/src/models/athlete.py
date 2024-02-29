@@ -3,8 +3,8 @@ from .model import Model
 from sqlalchemy import Enum, Integer
 
 
-class Sportsman(Model):
-    __tablename__ = 'sportsman'
+class Athlete(Model):
+    __tablename__ = 'athlete'
     STATUS_CHOICES = ("POR_VERIFICAR", "NO_VERIFICADO", "VERIFICADO")
 
     name = Column(String(64), nullable=False)
