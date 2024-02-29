@@ -15,4 +15,4 @@ def create_athlete():
     if error_post:
         return message_error, error_post
     else:
-        return 'servicio creado exitoso', 200
+        return 'deportista creado exitosamente', 200

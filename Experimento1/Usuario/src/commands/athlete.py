@@ -18,7 +18,7 @@ class Athlete:
 
     @staticmethod
     def send_message_topic(message):
-        cola_url = 'https://sqs.us-east-2.amazonaws.com/038172446204/sqssportapp'
+        cola_url = 'https://sqs.us-east-2.amazonaws.com/123456789012/sqssportapp'
         message_json = json.dumps(message)
         try:
             # Envía el mensaje a la cola de SQS
