@@ -82,6 +82,7 @@ https://proyectofinaluno.atlassian.net/browse/PF-51
 5. Ejecutar contenedor
     docker run <<nombre de contenedor>>  
     docker run -p <<puerto>>:<<puerto>> <<nombre de contenedor>>  
+    docker run --env-file .env.development -p <<puerto>>:<<puerto>> <<nombre de contenedor>>  
 
 # Microservicios (local)
     3000-API Gateway
