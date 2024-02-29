@@ -6,8 +6,8 @@ COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY . /app
+COPY src /app/src
 
 EXPOSE 3004
 
-CMD ["python", "app.py"]
+CMD FLASK_APP=./src/main.py flask run -h 0.0.0.0 -p 3004
