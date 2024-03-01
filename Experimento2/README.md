@@ -14,14 +14,14 @@ https://proyectofinaluno.atlassian.net/browse/PF-51
 - Nombre del metodo: crear-servicio
 ```json
 {
-    "nombre": "",
-    "descripcion": "",
-    "precio": 0.00,
-    "tipoServicioId":"ENUM",
-    "regionId": "COL|MEX|BRA",
-    "paisId": "COL|MEX|BRA",
-    "ciudad": "",
-    "socioId": 0
+    "name": "Equipaje seguro",
+    "description": "enviar tus implementos de deporte al lugar de entrenamiento seguro",
+    "price": 0.00,
+    "serviceTypeId": "TRANSPORTE",
+    "regionId": "COL",
+    "countryId": "COL",
+    "city": "BOG",
+    "partnerId": 0
 }
 ```
 - Response (OUT) - StatusCode: 200: Exitoso, 404:Algun dato no encontrado, 500: Error interno
@@ -93,6 +93,7 @@ https://proyectofinaluno.atlassian.net/browse/PF-51
 
     3002-Usuario     
         http://127.0.0.1:3002/usuarios/crear-servicio
+        http://127.0.0.1:3002/usuarios/consultar-servicio
         http://127.0.0.1:3002/usuarios/health
 
     3003-Sqs        
