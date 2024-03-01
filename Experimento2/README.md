@@ -93,7 +93,7 @@ https://proyectofinaluno.atlassian.net/browse/PF-51
 
     3002-Usuario     
         http://127.0.0.1:3002/usuarios/crear-servicio
-        http://127.0.0.1:3002/usuarios/consultar-servicio
+        http://127.0.0.1:3002/usuarios/consultar-servicios
         http://127.0.0.1:3002/usuarios/health
 
     3003-Sqs        

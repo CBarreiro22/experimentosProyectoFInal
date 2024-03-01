@@ -1,28 +1,22 @@
 from functools import wraps
 
-from flask import Blueprint
+from flask import Blueprint, jsonify
 from flask import request
 
 from ..commands.partner_service import PartnerService
+from ..models.model import init_db, db_session
+from ..models.partner import PartnerJsonSchema, Partner
 
 operations_blueprint = Blueprint('operations', __name__)
+init_db()
+partner_schema = PartnerJsonSchema()
 
-
-# def validate_request_body(func):
-#     @wraps(func)
-#     def decorated(*args, **kwargs):
-#         json_data = request.get_json()
-#         required_fields = ['description', 'size', 'fragile', 'offer']
-#         for field in required_fields:
-#             if field not in json_data or json_data[field] is None:
-#                 return '', 400
-#         return func(*args, **kwargs)
-#
-#     return decorated
-
+@operations_blueprint.route('/usuarios/consultar-servicios', methods=['GET'])
+def consultar_estatus_microservicios():
+    result = [partner_schema.dump(r) for r in db_session.query(Partner).all()]
+    return jsonify(result), 200
 
 @operations_blueprint.route('/usuarios/crear-servicio', methods=['POST'])
-# @validate_request_body
 def create_partner_service():
     body = request.get_json()
     message_error, error_post_service = PartnerService.create_partner_service(body)

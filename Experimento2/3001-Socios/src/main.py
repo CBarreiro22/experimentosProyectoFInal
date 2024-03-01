@@ -4,14 +4,17 @@ from dotenv import load_dotenv
 from flask import Flask, jsonify
 
 from commands.partner_service import PartnerService
+from src.blueprints.operations import operations_blueprint
 
 loaded = load_dotenv('.env.development')
 
 app = Flask(__name__)
+app.register_blueprint(operations_blueprint)
 
 
 def start_consumer():
     PartnerService()
+
 
 if __name__ == '__main__':
     start_consumer()
