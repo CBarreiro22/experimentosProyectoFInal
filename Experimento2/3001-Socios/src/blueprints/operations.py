@@ -7,4 +7,4 @@ operations_blueprint = Blueprint('operations', __name__)
 
 @operations_blueprint.route('/socios/health', methods=['GET'])
 def check_health():
-    return 'pong', 200
+    return 'ok', 200

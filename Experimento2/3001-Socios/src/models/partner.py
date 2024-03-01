@@ -1,7 +1,7 @@
 from marshmallow import Schema, fields
 from sqlalchemy import Column, Integer, String, Float
 
-from src.models.model import Model, Base
+from ..models.model import Model, Base
 
 
 class Partner(Model, Base):

@@ -28,4 +28,4 @@ def create_partner_service():
 
 @operations_blueprint.route('/usuarios/health', methods=['GET'])
 def check_health():
-    return 'pong', 200
+    return 'ok', 200

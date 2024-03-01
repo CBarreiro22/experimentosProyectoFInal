@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, jsonify
 
-from .blueprints.operations import operations_blueprint
+from  .blueprints.operations import operations_blueprint
 
 loaded = load_dotenv('.env.development')
 
