@@ -3,7 +3,11 @@ import boto3
 from flask import Flask, json
 
 # Configura el cliente de SQS
-sqs = boto3.client('sqs', region_name='us-east-2')
+sqs = boto3.client(
+    'sqs',
+    region_name='us-east-1',  # o la región que estés utilizando
+    endpoint_url='http://localhost:4566',  # URL de LocalStack
+)
 
 
 class Athlete:
@@ -18,7 +22,7 @@ class Athlete:
 
     @staticmethod
     def send_message_topic(message):
-        cola_url = 'https://sqs.us-east-2.amazonaws.com/123456789012/sqssportapp'
+        cola_url = 'http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/test-queue'
         message_json = json.dumps(message)
         try:
             # Envía el mensaje a la cola de SQS

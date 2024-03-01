@@ -2,7 +2,7 @@ import time
 import threading
 import boto3
 
-from Experimento1.Deportista.src.models.model import init_db, db_session
+from Experimento1.Deportista.src.models.model import init_db
 from flask import Blueprint
 
 athlete_blueprint = Blueprint('athlete', __name__)
@@ -49,3 +49,8 @@ class AthleteService:
     thread = threading.Thread(target=captured_messages)
     thread.start()
     print('Threat starting to receive messages')
+
+
+@athlete_blueprint.route('/deportista/health', methods=['GET'])
+def check_health():
+    return 'ok', 200
