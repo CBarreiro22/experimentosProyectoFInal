@@ -1,8 +1,10 @@
+import json
 import time
 import threading
 import boto3
 
-from Experimento1.Deportista.src.models.model import init_db
+from Experimento1.Deportista.src.models.athlete import Athlete
+from Experimento1.Deportista.src.models.model import init_db, db_session
 from flask import Blueprint
 
 athlete_blueprint = Blueprint('athlete', __name__)
@@ -36,12 +38,26 @@ def captured_messages():
                 for message in response['Messages']:
                     # Process the message received
                     print('Message captured:', message['Body'])
+                    athlete_data = parse_message(message)  # Suponiendo que tienes una función para parsear el mensaje
+                    athlete = Athlete(**athlete_data)
+                    db_session.add(athlete)
+                    db_session.commit()
                     # Drop message from queue
                     sqs.delete_message(
                         QueueUrl=queue_url,
                         ReceiptHandle=message['ReceiptHandle']
                     )
             time.sleep(5)
+
+
+def parse_message(message):
+    # Suponiendo que el mensaje está en formato JSON y tiene campos que corresponden a los atributos de Athlete
+    try:
+        athlete_data = json.loads(message['Body'])
+        return athlete_data
+    except json.JSONDecodeError:
+        print("Error: El mensaje no está en formato JSON válido.")
+        return None
 
 
 class AthleteService:
