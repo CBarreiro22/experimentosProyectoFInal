@@ -6,15 +6,18 @@ from Experimento1.Deportista.src.models.model import init_db, db_session
 from flask import Blueprint
 
 athlete_blueprint = Blueprint('athlete', __name__)
-sqs = boto3.client('sqs', region_name='us-east-2')
+sqs = boto3.client(
+    'sqs',
+    region_name='us-east-1',  # o la región que estés utilizando
+    endpoint_url='http://localhost:4566',  # URL de LocalStack
+)
 
 # URL de tu cola de SQS
-queue_url = 'https://sqs.us-east-1.amazonaws.com/123456789012/sqssportapp'
 init_db()
 
 
 def captured_messages():
-    queue_url = 'https://sqs.us-east-2.amazonaws.com/123456789012/sqssportapp'
+    queue_url = 'https://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/test-queue'
     while True:
 
         try:
@@ -24,8 +27,8 @@ def captured_messages():
                 MaxNumberOfMessages=1,
                 WaitTimeSeconds=20
             )
-            db_session.add(response)
-            db_session.commit()
+            # db_session.add(response)
+            # db_session.commit()
         except Exception as error:
             print(str(error))
         else:
@@ -42,7 +45,6 @@ def captured_messages():
 
 
 class AthleteService:
-
     # Start the threat to receive messages
     thread = threading.Thread(target=captured_messages)
     thread.start()
