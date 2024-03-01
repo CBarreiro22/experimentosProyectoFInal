@@ -3,12 +3,18 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, jsonify
 
-from .blueprints.operations import operations_blueprint
+from commands.partner_service import PartnerService
 
 loaded = load_dotenv('.env.development')
 
 app = Flask(__name__)
-app.register_blueprint(operations_blueprint)
+
+
+def start_consumer():
+    PartnerService()
+
+
+start_consumer()
 
 
 def handle_exception(err):
