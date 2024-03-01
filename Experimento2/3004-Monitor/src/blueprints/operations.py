@@ -1,8 +1,9 @@
 import os
 import threading, time
-from flask import Blueprint,jsonify
+from flask import Blueprint,jsonify, request
 from src.models.model import init_db, reset_db, db_session
 from src.models.monitor import MonitorJsonSchema, Monitor
+from src.models.microservicio import Microservice
 from dotenv import load_dotenv
 
 loaded = load_dotenv('.env.development')
@@ -25,18 +26,18 @@ def consultar_estatus_microservicios():
     return jsonify(result), 200
 
 def monitorea_microservicios():
+    micro_usuarios= Microservice("Usuarios", 5,os.environ["USERS_PATH"])
+    micro_socios= Microservice("Socios", 5,os.environ["SOCIOS_PATH"])
     while True:
-        # Aquí podrías realizar algunas verificaciones para determinar
-        # el estado de salud de tu aplicación
-        # Por ejemplo, podrías verificar la conexión a una base de datos,
-        # la disponibilidad de servicios externos, etc.
-
-        # Si todas las comprobaciones son exitosas, devuelve un mensaje de estado OK
         print('Monitoreando microservicios...')
-
-        # Usuarios
-        # Socios
-        db_session.add(Monitor("Micro2","OK",1))
+        micro_usuarios.check()
+        micro_socios.check()
+        if micro_usuarios.status == "ERROR":
+            db_session.add(Monitor(micro_usuarios.name,"ERROR",1))
+            micro_usuarios.reset()
+        if micro_socios.status == "ERROR":
+            db_session.add(Monitor(micro_socios.name,"ERROR",1))
+            micro_socios.reset()
         db_session.commit()
         time.sleep(int(os.environ["MONITOR_POLLING_SECONDS"]))
 
