@@ -6,7 +6,7 @@ from Experimento1.Deportista.src.models.model import init_db, db_session
 from flask import Blueprint
 
 athlete_blueprint = Blueprint('athlete', __name__)
-sqs = boto3.client('sqs')
+sqs = boto3.client('sqs', region_name='us-east-2')
 
 # URL de tu cola de SQS
 queue_url = 'https://sqs.us-east-1.amazonaws.com/123456789012/sqssportapp'
