@@ -44,9 +44,7 @@ Operación normal</td>
 <details>
 <summary>Diagrama implementado para el ASR</summary>
 
-
-![image](https://github.com/CBarreiro22/experimentosProyectoFInal/assets/111206402/0a75c46e-4f36-4a1a-90e0-9e4d22ba84ff)
-
+![image](https://github.com/CBarreiro22/experimentosProyectoFInal/assets/111206402/19cbd5b1-fac9-4aee-b2c2-8fc63692842a)
 
 </details>
 
