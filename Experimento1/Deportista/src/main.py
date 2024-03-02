@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.register_blueprint(athlete_blueprint)
 
 loaded = load_dotenv('.env.development')
-print(loaded)
+
 
 @app.errorhandler(ApiError)
 def handle_exception(err):
