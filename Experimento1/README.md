@@ -59,6 +59,7 @@ Operación normal</td>
     "tipo de identificacion": "CC|ID|PST",
     "edad": 0,
     "peso": 0.0,
+    "gender": "M|F",
     "pais de nacimiento": "COL|MEX|BRA",
     "pais de residencia": "COL|MEX|BRA",
     "ciudad de nacimiento": "",
