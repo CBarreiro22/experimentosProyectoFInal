@@ -51,6 +51,8 @@ Operación normal</td>
 
 ## Estructura de datos para el registro de deportistas
 
+### Body
+
 ```json
 {
     "nombre": "",
@@ -67,5 +69,13 @@ Operación normal</td>
     "Deportes que practica o desea practicar": "",
 }
 ```
+
+### Endpoint
+
+```http://{{Domine}}/usuarios/crear-deportista```
+
+> Para el avance se probo con localhost, pero luego estara el dominio de aws
+
+
 
 
