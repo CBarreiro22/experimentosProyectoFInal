@@ -3,9 +3,10 @@ import time
 import threading
 import boto3
 
-from Experimento1.Deportista.src.models.athlete import Athlete
-from Experimento1.Deportista.src.models.model import init_db, db_session
+
+from ..models.model import init_db, db_session
 from flask import Blueprint
+from ..models.athlete import Athlete
 
 athlete_blueprint = Blueprint('athlete', __name__)
 sqs = boto3.client(
