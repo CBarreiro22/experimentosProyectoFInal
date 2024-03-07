@@ -1,8 +1,8 @@
 import json
+import os
 import time
 import threading
 import boto3
-
 
 from ..models.model import init_db, db_session
 from flask import Blueprint
@@ -11,8 +11,9 @@ from ..models.athlete import Athlete
 athlete_blueprint = Blueprint('athlete', __name__)
 sqs = boto3.client(
     'sqs',
-    region_name='us-east-1',  # o la región que estés utilizando
-    endpoint_url='http://localhost:4566',  # URL de LocalStack
+    region_name='us-east-1',
+    aws_access_key_id=os.environ["aws_access_key_id"],
+    aws_secret_access_key=os.environ["aws_secret_access_key"]
 )
 
 # URL de tu cola de SQS
@@ -20,7 +21,7 @@ init_db()
 
 
 def captured_messages():
-    queue_url = 'http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/test-queue'
+    queue_url = 'https://sqs.us-east-1.amazonaws.com/914985899514/user-experimento.fifo'
     while True:
 
         try:
@@ -54,6 +55,8 @@ def captured_messages():
 def parse_message(message):
     # Suponiendo que el mensaje está en formato JSON y tiene campos que corresponden a los atributos de Athlete
     try:
+        print('este esw un message', message)
+        print('typeof', type(message['Body']))
         athlete_data = json.loads(message['Body'])
         return athlete_data
     except json.JSONDecodeError:
