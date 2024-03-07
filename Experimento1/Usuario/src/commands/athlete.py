@@ -2,9 +2,11 @@ import os
 import uuid
 
 import boto3
+from dotenv import load_dotenv
 
 from flask import Flask, json
 
+loaded = load_dotenv('.env.development')
 # Configura el cliente de SQS
 sqs = boto3.client(
     'sqs',
