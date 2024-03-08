@@ -3,12 +3,15 @@ import threading
 import time
 
 import boto3
+from dotenv import load_dotenv
 
 from flask import Flask, json
 
 from ..models.model import init_db, db_session
 from ..models.partner import PartnerJsonSchema, Partner
 
+
+loaded = load_dotenv('.env.development')
 # Configura el cliente de SQS
 sqs = boto3.client(
     'sqs',
