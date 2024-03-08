@@ -1,13 +1,9 @@
 FROM python:3.10-alpine
-
-WORKDIR /app
-
+WORKDIR /usuario
 COPY requirements.txt .
-
+COPY .env.development .
 RUN pip install -r requirements.txt
-
-COPY . /app
-
-EXPOSE 3002
-
-CMD ["python", "app.py"]
+COPY src /usuario/src
+ENV ENV_FILE .env.development
+EXPOSE 3003
+CMD FLASK_APP=./src/main.py flask run -h 0.0.0.0 -p 3003

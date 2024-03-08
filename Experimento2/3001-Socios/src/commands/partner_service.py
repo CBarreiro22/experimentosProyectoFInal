@@ -1,3 +1,4 @@
+import os
 import threading
 import time
 
@@ -9,14 +10,19 @@ from ..models.model import init_db, db_session
 from ..models.partner import PartnerJsonSchema, Partner
 
 # Configura el cliente de SQS
-sqs = boto3.client('sqs', region_name='us-east-2')
+sqs = boto3.client(
+    'sqs',
+    region_name='us-east-2',
+    aws_access_key_id=os.environ["aws_access_key_id"],
+    aws_secret_access_key=os.environ["aws_secret_access_key"]
+)
 init_db()
 partner_schema = PartnerJsonSchema()
 app = Flask(__name__)
 
 
 def captured_messages():
-    queue_url = 'https://sqs.us-east-2.amazonaws.com/038172446204/sqssportapp'
+    queue_url = 'https://sqs.us-east-1.amazonaws.com/914985899514/user-experimento.fifo'
     while True:
 
         try:
