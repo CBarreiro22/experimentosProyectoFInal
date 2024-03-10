@@ -30,7 +30,7 @@ class PartnerService:
     @staticmethod
     def send_message_topic(message):
         # Se asume que 'request' está disponible, si no, debes proporcionar el contexto adecuado
-        cola_url = 'https://sqs.us-east-1.amazonaws.com/914985899514/user-experimento.fifo'
+        cola_url = 'https://sqs.us-east-1.amazonaws.com/914985899514/socio'
         message_json = json.dumps(message)
         try:
             # Envía el mensaje a la cola de SQS
