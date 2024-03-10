@@ -7,6 +7,7 @@ from sqlalchemy import Column, DateTime, create_engine, String
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy_utils import UUIDType
+from sqlalchemy import inspect
 
 ENV = None
 
@@ -39,8 +40,13 @@ Base.query = db_session.query_property()
 
 # Initialize the database schema
 def init_db():
-    Base.metadata.drop_all(bind=engine)
-    Base.metadata.create_all(bind=engine)
+    inspector = inspect(engine)
+    if not inspector.has_table("athlete"):
+        Base.metadata.drop_all(bind=engine)
+        Base.metadata.create_all(bind=engine)
+        print("La base de datos y la tabla han sido creadas.")
+    else:
+        print("La tabla athlete ya existe en la base de datos.")
 
 
 # Define a base class for models with common attributes
