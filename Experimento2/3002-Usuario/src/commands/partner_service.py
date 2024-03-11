@@ -10,7 +10,7 @@ loaded = load_dotenv('.env.development')
 # Configura el cliente de SQS
 sqs = boto3.client(
     'sqs',
-    region_name='us-east-2',
+    region_name='us-east-1',
     aws_access_key_id=os.environ["aws_access_key_id"],
     aws_secret_access_key=os.environ["aws_secret_access_key"]
 )
